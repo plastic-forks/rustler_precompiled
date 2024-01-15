@@ -961,8 +961,13 @@ defmodule RustlerPrecompiled do
     metadata_file = metadata_file(nif_module)
     existing = read_map_from_file(metadata_file)
 
+    IO.inspect(metadata_file)
+    IO.inspect(existing)
+
     unless Map.equal?(metadata, existing) do
       dir = Path.dirname(metadata_file)
+
+      IO.inspect(dir)
       :ok = File.mkdir_p(dir)
 
       File.write!(metadata_file, inspect(metadata, limit: :infinity, pretty: true))
